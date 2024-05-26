@@ -1,0 +1,24 @@
+version: "3.1"
+services:
+  lake:
+    image: mongo
+    container_name: mongo_lake
+    ports:
+      - "27017:27017"
+  scrapper:
+    container_name: python_scrapper
+    build:
+      context: ./
+      dockerfile: Dockerfile.venv 
+    env_file:
+      - .env
+    depends_on:
+      - lake
+  neo4j:
+    container_name: neo4j_db
+    image: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: none
