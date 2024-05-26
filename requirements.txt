@@ -1,0 +1,4 @@
+requests
+pymongo
+neo4j
+python-dotenv
