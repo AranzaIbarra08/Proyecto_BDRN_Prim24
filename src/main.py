@@ -8,7 +8,7 @@ collection = db["meals"]
 
 # Función para obtener datos de una comida por ID
 def fetch_meal_data(meal_id):
-   response = requests.get(f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={meal_id}")
+   response = requests.get(f"https://www.themealdb.com/api/json/v2/9973533/lookup.php?i={meal_id}")
    if response.status_code == 200:
       data = response.json()
       if data["meals"]:
@@ -28,5 +28,5 @@ def insert_meal_data(meal_id):
       print(f"Error fetching data for meal ID {meal_id}.")
 
 if __name__ == "__main__":
-   for meal_id in range(50000, 55000):
+   for meal_id in range(52764, 53086):
       insert_meal_data(meal_id)
