@@ -1,3 +1,5 @@
+##En el equirements meti todo lo que me ehace falta en los imports 
+
 requests
 pymongo
 neo4j

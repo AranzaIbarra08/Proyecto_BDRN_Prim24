@@ -1,0 +1,1 @@
+mongoexport --db meals --collection dishes --type=csv --fields strMeal, strCategory, strArea --out /data/db/meals_filtered.csv

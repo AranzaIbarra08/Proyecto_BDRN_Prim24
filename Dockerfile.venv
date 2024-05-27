@@ -11,18 +11,18 @@ COPY requirements.txt .
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Copia el codigo de python al contenedor
-COPY ./scripts/cocktails_data.py .
-COPY ./scripts/importDrinksNeo4J.py .
-COPY ./scripts/importIngredientsNeo4J.py .
-COPY ./scripts/importRealationsNeo4J.py .
-COPY ./scripts/importCassandra.py .
-COPY ./data/drinks_filtered.csv .
-COPY ./data/drinks.csv .
+COPY ./scripts/meals_data.py .
+COPY ./scripts/importMealsNeo4j.py .
+COPY ./scripts/importIngridientsNeo4j.py .
+COPY ./scripts/importRelationsNeo4j.py .
+
+COPY ./data/meals_filtered.csv .
+
 COPY ./data/ingredients.csv .
-COPY ./data/popular_drinks.csv .
+
 
 # Define el comando por defecto para ejecutar la aplicación
-CMD sleep 45 && python cocktails_data.py && \
-    python importIngredientsNeo4J.py && \
-    python importDrinksNeo4J.py && \
-    python importRealationsNeo4J.py 
+CMD sleep 45 && python meals_data.py && \
+    python importIngridientsNeo4j.py && \
+    python importMealsNeo4j.py && \
+    python importRelationsNeo4j.py 
