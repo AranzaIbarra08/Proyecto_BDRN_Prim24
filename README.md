@@ -102,12 +102,11 @@ Los elementos en la colección `dishes` tienen la siguiente estructura:
             '50g/1¾oz'
         ]
     }
-
     ```
     
 Mientras que los elementos de la colección `ingredients` tienen esta estructura:
 
-    ```javascript
+    ```
     {
     _id: ObjectId('6653f8c3c7650bfd6e7e667f'),
     idIngredient: '1',
