@@ -5,7 +5,6 @@ Equipo: [Aranza Ibarra](https://github.com/AranzaIbarra08), [Frida Márquez](htt
 ## Estructura del Proyecto
 - `data/`: Contiene archivos de datos utilizados en el proyecto.
 - `scripts/`: Incluye scripts para la obtención y procesamiento de datos.
-- `src/`: Código fuente principal del proyecto.
 - `Dockerfile.venv`: Configuración para el entorno virtual de Docker.
 - `docker-compose.yml`: Configuración para la orquestación de contenedores Docker.
 - `requirements.txt`: Lista de dependencias del proyecto.
