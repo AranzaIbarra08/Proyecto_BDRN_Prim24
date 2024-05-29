@@ -60,7 +60,6 @@ Creamos dos colecciones dentro de la base de datos `meals`:
 * `ingredients`: incluye todos los ingredientes.
 
 Los elementos en la colección `dishes` tienen la siguiente estructura:
-
     ```
     {
         _id: ObjectId('6653f8b8c7650bfd6e7e6552'),
