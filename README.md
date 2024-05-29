@@ -61,14 +61,12 @@ Creamos dos colecciones:
 
 Los elementos en la colección `meals` tienen la siguiente estructura:
 
-    ```
     meals.findOne()
-    ```
+    
 Mientras que los elementos de la colección `ingredients` tienen esta estructura:
 
-    ```
     ingredients.findOne()
-    ```
+    
 # Consultas
 Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 1. Acceder al contenedor de MongoDB que está en el Docker Compose.
