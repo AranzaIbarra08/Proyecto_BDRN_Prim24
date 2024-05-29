@@ -130,7 +130,7 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ```
     use meals
     ```
-3. Ejecutar las consultas
+3. Ejecutar las consultas:
 
     a. Contar la cantidad de comidas que hay por región y categoría:
     ```javascript
@@ -206,4 +206,4 @@ localhost:7474/browser/
 ```
 2. Oprimir el boton `Connect`.
 
-3. Hacer las consultas. 
+3. Hacer las consultas:
