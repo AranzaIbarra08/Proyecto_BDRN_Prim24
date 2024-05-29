@@ -54,18 +54,70 @@ Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos pa
     
 ## MongoDB
 Después de obtener los datos de la API de MealDB, los insertamos en MongoDB con un script de Python. 
-Creamos dos colecciones:
+Creamos dos colecciones dentro de la base de datos `meals`:
 
-* `meals`: almacena los elementos en un formato fácil de leer en MongoDB.
-* `ingredients`: incluye todos los ingredientes disponibles en la API.
+* `dishes`: almacena los platillos.
+* `ingredients`: incluye todos los ingredientes.
 
-Los elementos en la colección `meals` tienen la siguiente estructura:
+Los elementos en la colección `dishes` tienen la siguiente estructura:
 
-    meals.findOne()
+    ```
+    {
+        _id: ObjectId('6653f8b8c7650bfd6e7e6552'),
+        idMeal: '52768',
+        strMeal: 'Apple Frangipan Tart',
+        strDrinkAlternate: null,
+        strCategory: 'Dessert',
+        strArea: 'British',
+        strInstructions: 'Preheat the oven to 200C/180C Fan/Gas 6.\r\n' +
+            'Put the biscuits in a large re-sealable freezer bag and bash with a rolling pin into fine crumbs. Melt the butter in a small pan, then add the biscuit crumbs and stir until coated with butter. Tip into the tart tin and, using the back of a spoon, press over the base and sides of the tin to give an even layer. Chill in the fridge while you make the filling.\r\n' +
+            'Cream together the butter and sugar until light and fluffy. You can do this in a food processor if you have one. Process for 2-3 minutes. Mix in the eggs, then add the ground almonds and almond extract and blend until well combined.\r\n' +
+            'Peel the apples, and cut thin slices of apple. Do this at the last minute to prevent the apple going brown. Arrange the slices over the biscuit base. Spread the frangipane filling evenly on top. Level the surface and sprinkle with the flaked almonds.\r\n' +
+            'Bake for 20-25 minutes until golden-brown and set.\r\n' +
+            'Remove from the oven and leave to cool for 15 minutes. Remove the sides of the tin. An easy way to do this is to stand the tin on a can of beans and push down gently on the edges of the tin.\r\n' +
+            'Transfer the tart, with the tin base attached, to a serving plate. Serve warm with cream, crème fraiche or ice cream.',
+        strMealThumb: 'https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg',
+        strTags: 'Tart,Baking,Fruity',
+        strYoutube: 'https://www.youtube.com/watch?v=rp8Slv4INLk',
+        strSource: null,
+        strImageSource: null,
+        strCreativeCommonsConfirmed: null,
+        dateModified: null,
+        ingredients: [
+            'digestive biscuits',
+            'butter',
+            'Bramley apples',
+            'butter, softened',
+            'caster sugar',
+            'free-range eggs, beaten',
+            'ground almonds',
+            'almond extract',
+            'flaked almonds'
+        ],
+        measures: [
+            '175g/6oz', '75g/3oz',
+            '200g/7oz', '75g/3oz',
+            '75g/3oz',  '2',
+            '75g/3oz',  '1 tsp',
+            '50g/1¾oz'
+        ]
+    }
+
+    ```
     
 Mientras que los elementos de la colección `ingredients` tienen esta estructura:
 
-    ingredients.findOne()
+    ```
+    {
+    _id: ObjectId('6653f8c3c7650bfd6e7e667f'),
+    idIngredient: '1',
+    strIngredient: 'Chicken',
+    strDescription: 'The chicken is a type of domesticated fowl, a subspecies of the red junglefowl (Gallus gallus). It is one of the most common and widespread domestic animals, with a total population of more than 19 billion as of 2011. There are more chickens in the world than any other bird or domesticated fowl. Humans keep chickens primarily as a source of food (consuming both their meat and eggs) and, less commonly, as pets. Originally raised for cockfighting or for special ceremonies, chickens were not kept for food until the Hellenistic period (4th–2nd centuries BC).\r\n' +
+        '\r\n' +
+        'Genetic studies have pointed to multiple maternal origins in South Asia, Southeast Asia, and East Asia, but with the clade found in the Americas, Europe, the Middle East and Africa originating in the Indian subcontinent. From ancient India, the domesticated chicken spread to Lydia in western Asia Minor, and to Greece by the 5th century BC. Fowl had been known in Egypt since the mid-15th century BC, with the "bird that gives birth every day" having come to Egypt from the land between Syria and Shinar, Babylonia, according to the annals of Thutmose III.',
+    strType: null
+    }
+    ```
     
 ### Consultas
 Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
@@ -73,13 +125,13 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ```bash
     docker exec -it mongo_lake mongosh
     ```
-2. Activar la colección `meals`.
+2. Activar la base de datos `meals`.
     ```
     use meals
     ```
 3. Ejecutar las consultas
 
-    a. Contar la cantidad de comidas que hay por región y categoría.
+    a. Contar la cantidad de comidas que hay por región y categoría:
     ```javascript
     db.dishes.aggregate([
     { $group: {
@@ -90,22 +142,21 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ]).pretty()
     ```
 
-    b. El nombre, categoría y región de la comida que tienen más de un tag ordenadas por nombre.
+    b. El nombre, categoría y región de la comida que tienen más de un tag ordenadas por nombre:
     ```javascript
     db.dishes.find({
-    "strTags": { $regex: ",", $options: "i" }
+        "strTags": { $regex: ",", $options: "i" }
     },
     {
-    _id: 0,
-    strMeal: 1,
-    strCategory: 1,
-    strArea: 1,
-    strTags: 1
+        _id: 0,
+        strMeal: 1,
+        strCategory: 1,
+        strArea: 1,
+        strTags: 1
     }).sort({ strMeal: 1 }).pretty()
     ```
 
-    c. Contar la cantidad de comidas que hay por la inicial de su nombre.
-
+    c. Contar la cantidad de comidas que hay por la inicial de su nombre:
     ```javascript
     db.dishes.aggregate([
     { $project: {
@@ -119,7 +170,25 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     { $sort: { _id: 1 }}
     ]).pretty()
     ```
-
+    
+    d. Cantidad de platillos por número de ingredientes:
+    ```javascript
+    db.dishes.aggregate([
+    { $project: {
+        cantIngredientesXPlatillo: { $size: { $ifNull: ["$ingredients", []] } }
+    }},
+    { $group: {
+        _id: "$cantIngredientesXPlatillo",
+        countPlatillos: { $sum: 1 }
+    }},
+    { $project: {
+        cantIngredientesXPlatillo: "$_id",
+        countPlatillos: 1,
+        _id: 0
+    }},
+    { $sort: { cantIngredientesXPlatillo: 1 }}
+    ]).pretty()
+    ```
 
 ## Neo4j
 
