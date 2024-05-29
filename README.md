@@ -60,11 +60,12 @@ Creamos dos colecciones:
 * `ingredients`: incluye todos los ingredientes disponibles en la API.
 
 Los elementos en la colección `meals` tienen la siguiente estructura:
-    
+
     ```
     meals.findOne()
     ```
 Mientras que los elementos de la colección `ingredients` tienen esta estructura:
+
     ```
     ingredients.findOne()
     ```
