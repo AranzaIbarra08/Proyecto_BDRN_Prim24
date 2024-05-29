@@ -34,6 +34,8 @@ El uso de la página donde se encuentran algunas de las recetas de MealDB es gra
 ## Archivos .csv
 Los archivos `ingridients.csv` y `meals_filtered.csv`que se encuentran en la carpeta `data` fueron creados siguiendo estos pasos:
 
+Nota: No es necesario realizar estos pasos si quieres ejecutar el proyecto. Son solo explicativos.
+
 1. Entrar al bash del contenedor de Mongo.
     ```
     docker exec -it mongo_lake /bin/bash
@@ -191,6 +193,7 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ```
 
 ## Neo4j
+
 
 ### Consultas
 
