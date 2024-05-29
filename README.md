@@ -105,7 +105,7 @@ Los elementos en la colección `dishes` tienen la siguiente estructura:
     
 Mientras que los elementos de la colección `ingredients` tienen esta estructura:
 
-    ```
+ ```
     {
     _id: ObjectId('6653f8c3c7650bfd6e7e667f'),
     idIngredient: '1',
@@ -115,7 +115,7 @@ Mientras que los elementos de la colección `ingredients` tienen esta estructura
         'Genetic studies have pointed to multiple maternal origins in South Asia, Southeast Asia, and East Asia, but with the clade found in the Americas, Europe, the Middle East and Africa originating in the Indian subcontinent. From ancient India, the domesticated chicken spread to Lydia in western Asia Minor, and to Greece by the 5th century BC. Fowl had been known in Egypt since the mid-15th century BC, with the "bird that gives birth every day" having come to Egypt from the land between Syria and Shinar, Babylonia, according to the annals of Thutmose III.',
     strType: null
     }
-    ```
+```
     
 ### Consultas
 Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
