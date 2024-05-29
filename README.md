@@ -15,7 +15,7 @@ Equipo: [Aranza Ibarra](https://github.com/AranzaIbarra08), [Frida Márquez](htt
 1. Hacer un Fork y clonar a tu local este repositorio. 
 2. Dentro de la carpeta del repositorio, crear un archivo .env con la llave para la API.
 3. En la carpeta del repositorio, escribir el siguiente comando en la terminal:
-  ```bash
+    ```bash
     docker compose up -d
     ```
     Nota: es importante asegurarte de que Docker este corriendo, de lo contrario marcará error.
