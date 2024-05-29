@@ -46,11 +46,12 @@ Los archivos `ingridients.csv` y `meals_filtered.csv`que se encuentran en la car
     mongoexport --db meals --collection dishes --type=csv --fields strMeal, strCategory, strArea --out /data/db/meals_filtered.csv
     ```
 Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos para guardar los archivos en la carpeta `data`:
+
     ```
     docker cp mongo_lake:/data/db/ingredients.csv ./data
     ```
     ```
-    docker cp mongo_lake:/data/db/meals_filtered.csv ./data
+        docker cp mongo_lake:/data/db/meals_filtered.csv ./data
     ```
 
 ## MongoDB
@@ -72,9 +73,8 @@ Mientras que los elementos de la colección `ingredients` tienen esta estructura
 # Consultas
 Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 1. Acceder al contenedor de MongoDB que está en el Docker Compose.
-    ```
+    ```bash
     docker exec -it mongo_lake mongosh
-    
     ```
 2. Activar la colección `meals`.
     ```
@@ -83,7 +83,7 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 3. Ejecutar las consultas
 
     a. Contar la cantidad de comidas que hay por región y categoría.
-    ```
+    ```javascript
     db.dishes.aggregate([
     { $group: {
         _id: { category: "$strArea", area: "$strCategory" },
@@ -94,7 +94,7 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ```
 
     b. El nombre, categoría y región de la comida que tienen más de un tag ordenadas por nombre.
-    ```
+    ```javascript
     db.dishes.find({
     "strTags": { $regex: ",", $options: "i" }
     },
@@ -109,7 +109,7 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 
     c. Contar la cantidad de comidas que hay por la inicial de su nombre.
 
-    ```
+    ```javascript
     db.dishes.aggregate([
     { $project: {
         firstLetter: { $substrCP: ["$strMeal", 0, 1] },
