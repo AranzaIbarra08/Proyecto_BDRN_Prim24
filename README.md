@@ -204,6 +204,6 @@ Para realizar las consultas en Neo4j, es necesario seguir estos pasos:
 ```
 localhost:7474/browser/
 ```
-2. Oprimir el boton `Connect`.
+2. Oprimir el boton `Connect` (Este contenedor de Neo4j no pide usuario y contraseña).
 
 3. Hacer las consultas:
