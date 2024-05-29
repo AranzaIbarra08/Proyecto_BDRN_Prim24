@@ -48,10 +48,11 @@ Los archivos `ingridients.csv` y `meals_filtered.csv`que se encuentran en la car
 
 Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos para guardar los archivos en la carpeta `data`:
 
+    ```bash
     docker cp mongo_lake:/data/db/ingredients.csv ./data
-    
-    docker cp mongo_lake:/data/db/meals_filtered.csv ./data
 
+    docker cp mongo_lake:/data/db/meals_filtered.csv ./data
+    ```
 ## MongoDB
 Después de obtener los datos de la API de MealDB, los insertamos en MongoDB con un script de Python. 
 Creamos dos colecciones:
