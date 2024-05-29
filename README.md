@@ -67,7 +67,7 @@ Mientras que los elementos de la colección `ingredients` tienen esta estructura
 
     ingredients.findOne()
     
-# Consultas
+### Consultas
 Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 1. Acceder al contenedor de MongoDB que está en el Docker Compose.
     ```bash
@@ -123,6 +123,6 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
 
 ## Neo4j
 
-# Consultas
+### Consultas
 
 
