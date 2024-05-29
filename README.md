@@ -192,8 +192,18 @@ Para realizar las consultas en MongoDB, es necesario seguir estos pasos:
     ```
 
 ## Neo4j
+Para entrar al contenedor de Neo4j en el Docker Compose usamos tres scripts de Python:
 
+* importIngridientsNeo4j: Crea objetos tipo `Ingredient` dentro de Neo4j.
+* importMealsNeo4j: Crea objetos tipo `Meal` dentro de Neo4j.
+* importRelationsNeo4j: Crea relaciones tipo `contains` y une `ingredients` a `meals`. 
 
 ### Consultas
+Para realizar las consultas en Neo4j, es necesario seguir estos pasos:
+1. Acceder al contenedor de Neo4j que está en el Docker Compose copiando el siguiente comando en el browser. 
+```
+localhost:7474/browser/
+```
+2. Oprimir el boton `Connect`.
 
-
+3. Hacer las consultas. 
