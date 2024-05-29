@@ -46,13 +46,10 @@ Los archivos `ingridients.csv` y `meals_filtered.csv`que se encuentran en la car
     mongoexport --db meals --collection dishes --type=csv --fields strMeal, strCategory, strArea --out /data/db/meals_filtered.csv
     ```
 
-Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos para guardar los archivos en la carpeta:
+Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos para guardar los archivos en la carpeta `data`:
 
-    ```bash
-    docker cp mongo_lake:/data/db/ingredients.csv ./data
     ```
-    ```bash
-    docker cp mongo_lake:/data/db/meals_filtered.csv ./data
+    docker cp mongo_lake:/data/db/ingredients.csv ./data
     ```
 
 ## MongoDB
