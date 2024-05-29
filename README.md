@@ -30,6 +30,9 @@ Equipo: [Aranza Ibarra](https://github.com/AranzaIbarra08), [Frida Márquez](htt
 
 El uso de la página donde se encuentran algunas de las recetas de MealDB es gratuita. Sin embargo, para tener acceso a la versión beta de la API, que permite filtros de múltiples ingredientes, agregar tus propias comidas e imágenes y listar la base de datos completa hay que pagar $50 (mxn). 
 
+## Clave para acceder a la API
+Dentro de el repositorio deberás crear un archivo `.env` con la llave de la API. Por motivos de seguiridad, los archivos `.env` fueron agregados al `gitignore`.  
+
 ## Archivos .csv
 Los archivos `ingridients.csv` y `meals_filtered.csv`que se encuentran en la carpeta `data` fueron creados siguiendo estos pasos:
 
