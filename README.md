@@ -51,7 +51,6 @@ Una vez ejecutados, fuera del bash de Mongo, corrimos los siguientes comandos pa
     docker cp mongo_lake:/data/db/ingredients.csv ./data
 ```
 ```
-
     docker cp mongo_lake:/data/db/meals_filtered.csv ./data
 ```
     
