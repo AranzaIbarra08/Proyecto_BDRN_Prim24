@@ -217,7 +217,7 @@ localhost:7474/browser/
 
 3. Hacer las consultas:
 
-    #### Consultas para conocer la elementos de la base de datos:
+    #### Consultas para conocer los elementos de la base de datos:
 
     a. Ver visualmnete la estrucutra de la base de datos (es decir, objetos y como están conectados)
     ```cypher
