@@ -4,6 +4,7 @@ Equipo: [Aranza Ibarra](https://github.com/AranzaIbarra08), [Frida Márquez](htt
 
 ## Estructura del Proyecto
 - `data/`: Contiene archivos de datos utilizados en el proyecto.
+- `img/`: Contiene imagenes ilustrativas utilizadas en el README del proyecto.
 - `scripts/`: Incluye scripts para la obtención y procesamiento de datos.
 - `Dockerfile.venv`: Configuración para el entorno virtual de Docker.
 - `docker-compose.yml`: Configuración para la orquestación de contenedores Docker.
