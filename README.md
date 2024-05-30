@@ -217,7 +217,7 @@ localhost:7474/browser/
 
 3. Hacer las consultas:
 
-    Consultas para conocer la elementos de la base de datos:
+    # Consultas para conocer la elementos de la base de datos:
 
     a. Ver visualmnete la estrucutra de la base de datos (es decir, objetos y como están conectados)
     ```cypher
@@ -240,8 +240,8 @@ localhost:7474/browser/
     RETURN DISTINCT m.category AS Category
     ```
 
-    Consultas más especificas:
-    
+    # Consultas más especificas:
+
     a. Encontrar todas las Meals que contienen un Ingredient específico (en este caso "Chicken"), y ver de que región es cada platillo:
     ```cypher
     MATCH (i:Ingredient {name: "Chicken"})<-[:CONTAINS]-(m:Meal)
