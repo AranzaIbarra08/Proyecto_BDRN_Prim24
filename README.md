@@ -231,19 +231,19 @@ MATCH (m:Meal)
 RETURN DISTINCT m.category AS Category
 
 
-a) Encontrar todas las Meals que contienen un Ingredient específico (en este caso "Chicken"), y ver de que región es cada platillo:
+a. Encontrar todas las Meals que contienen un Ingredient específico (en este caso "Chicken"), y ver de que región es cada platillo:
 ```cypher
 MATCH (i:Ingredient {name: "Chicken"})<-[:CONTAINS]-(m:Meal)
 RETURN m.name AS MealName, m.area AS Area
 ```
 
-b) Encontrar todos los Ingredients que se utilizan para una categoría de Meal específica (en este caso "Dessert):
+b. Encontrar todos los Ingredients que se utilizan para una categoría de Meal específica (en este caso "Dessert):
 ```cypher
 MATCH (m:Meal {category: "Dessert"})-[:CONTAINS]->(i:Ingredient)
 RETURN DISTINCT i.name AS IngredientName
 ```
 
-c) Mostrar cuántos Ingredients tiene cada Meal, y ordenarlo por nombre descendiente:
+c. Mostrar cuántos Ingredients tiene cada Meal, y ordenarlo por nombre descendiente:
 ```cypher
 MATCH (m:Meal)-[:CONTAINS]->(i:Ingredient)
 WITH m.name AS MealName, COLLECT(DISTINCT i.name) AS IngredientsList
@@ -251,14 +251,14 @@ RETURN MealName, SIZE(IngredientsList) AS NumberOfDistinctIngredients
 ORDER BY NumberOfDistinctIngredients DESC
 ```
 
-d) Mostrar todas las Meals que no contienen un Ingredient en específico:
+d. Mostrar todas las Meals que no contienen un Ingredient en específico:
 ```cypher
 MATCH (m:Meal)
 WHERE NOT (m)-[:CONTAINS]->(:Ingredient {name: "Chicken"})
 RETURN m.name AS MealName, m.category AS Category, m.area AS Area
 ```
 
-e) Encontrar el Ingredient más común, y en cuántas Meals aparece:
+e. Encontrar el Ingredient más común, y en cuántas Meals aparece:
 ```cypher
 MATCH (i:Ingredient)<-[:CONTAINS]-(m:Meal)
 WITH i, COLLECT(DISTINCT m.name) AS MealNames
@@ -267,7 +267,7 @@ ORDER BY NumberOfMeals DESC
 LIMIT 5
 ```
 
-f) Encontrar promedio, cuántos Ingredients hay en cada Meal, de cada tipo:
+f. Encontrar promedio, cuántos Ingredients hay en cada Meal, de cada tipo:
 ```cypher
 MATCH (m:Meal)
 WITH m.category AS category, SIZE(m.ingredients) AS ingredientCount
@@ -275,7 +275,7 @@ RETURN category, AVG(ingredientCount) AS averageIngredientCount
 ORDER BY averageIngredientCount DESC
 ```
 
-g) Mostrar las Meals que contienen todos los Ingredients de una lista determinada:
+g. Mostrar las Meals que contienen todos los Ingredients de una lista determinada:
 ```cypher
 MATCH (m:Meal)-[:CONTAINS]->(i:Ingredient)
 WITH m, COLLECT(i.name) AS ingredientList
@@ -283,7 +283,7 @@ WHERE ALL(ingredient IN ["Bread", "Eggs", "Black Pudding"] WHERE ingredient IN i
 RETURN DISTINCT(m.name) AS MealName
 ```
 
-h) Encontra las Meals que, a partir del número de ingredientes que comparten, podríamos considerar que son los más similares:
+h. Encontra las Meals que, a partir del número de ingredientes que comparten, podríamos considerar que son los más similares:
 ```cypher
 MATCH (m1:Meal)-[:CONTAINS]->(i:Ingredient)<-[:CONTAINS]-(m2:Meal)
 WHERE m1.name <> m2.name
