@@ -217,29 +217,30 @@ localhost:7474/browser/
 
 3. Hacer las consultas:
 
-Consultas para conocer la estructura de la base de datos:
+    Consultas para conocer la elementos de la base de datos:
 
     a. Ver visualmnete la estrucutra de la base de datos (es decir, objetos y como están conectados)
     ```cypher
     MATCH (n)-[r]->(m) RETURN n, r, m LIMIT 100
     ```
-    b. Ver la estructura de un objeto del tipo Meal:
+
+    b. Ver la estructura de un objeto del tipo Meal
     ```cypher
     MATCH (m:Meal) RETURN m LIMIT 1
     ```
 
-    c. Ver la estructura de un objeto del tipo Ingredient:
+    c. Ver la estructura de un objeto del tipo Ingredient
     ```cypher
     MATCH (i:Ingredient) RETURN i LIMIT 1
     ```
 
-    d. Ver todas las categorías de comida que hay:
+    d. Ver todas las categorías de comida que hay
     ```cypher
     MATCH (m:Meal)
     RETURN DISTINCT m.category AS Category
     ```
 
-Consultas más especificas: 
+    Consultas más especificas:
     
     a. Encontrar todas las Meals que contienen un Ingredient específico (en este caso "Chicken"), y ver de que región es cada platillo:
     ```cypher
