@@ -219,22 +219,22 @@ localhost:7474/browser/
 
     #### Consultas para conocer los elementos de la base de datos:
 
-    a. Ver visualmnete la estrucutra de la base de datos (es decir, objetos y como están conectados)
+    a. Ver visualmente la estructura de la base de datos (es decir, objetos y como están conectados):
     ```cypher
     MATCH (n)-[r]->(m) RETURN n, r, m LIMIT 100
     ```
 
-    b. Ver la estructura de un objeto del tipo Meal
+    b. Ver la estructura de un objeto tipo Meal:
     ```cypher
     MATCH (m:Meal) RETURN m LIMIT 1
     ```
 
-    c. Ver la estructura de un objeto del tipo Ingredient
+    c. Ver la estructura de un objeto tipo Ingredient:
     ```cypher
     MATCH (i:Ingredient) RETURN i LIMIT 1
     ```
 
-    d. Ver todas las categorías de comida que hay
+    d. Ver todas las categorías de comida que hay:
     ```cypher
     MATCH (m:Meal)
     RETURN DISTINCT m.category AS Category
@@ -294,7 +294,7 @@ localhost:7474/browser/
     RETURN DISTINCT(m.name) AS MealName
     ```
 
-    h. Encontra las Meals que, a partir del número de ingredientes que comparten, podríamos considerar que son los más similares:
+    h. Encontra las Meals que a partir del número de ingredientes que comparten, podríamos considerar que son las más similares:
     ```cypher
     MATCH (m1:Meal)-[:CONTAINS]->(i:Ingredient)<-[:CONTAINS]-(m2:Meal)
     WHERE m1.name <> m2.name
