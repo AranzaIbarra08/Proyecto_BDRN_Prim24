@@ -216,3 +216,84 @@ localhost:7474/browser/
 2. Oprimir el boton `Connect` (Este contenedor de Neo4j no pide usuario y contraseña).
 
 3. Hacer las consultas:
+
+# Ver visualmnete la estrucutra de la base de datos (es decir, objetos y como están conectados)
+MATCH (n)-[r]->(m) RETURN n, r, m LIMIT 100
+
+# Ver la estructura de un objeto del tipo Meal
+MATCH (m:Meal) RETURN m LIMIT 1
+
+# Ver la estructura de un objeto del tipo Ingredient
+MATCH (i:Ingredient) RETURN i LIMIT 1
+
+# Ver todas las categorías de comida que hay
+MATCH (m:Meal)
+RETURN DISTINCT m.category AS Category
+
+
+a) Encontrar todas las Meals que contienen un Ingredient específico (en este caso "Chicken"), y ver de que región es cada platillo:
+```cypher
+MATCH (i:Ingredient {name: "Chicken"})<-[:CONTAINS]-(m:Meal)
+RETURN m.name AS MealName, m.area AS Area
+```
+
+b) Encontrar todos los Ingredients que se utilizan para una categoría de Meal específica (en este caso "Dessert):
+```cypher
+MATCH (m:Meal {category: "Dessert"})-[:CONTAINS]->(i:Ingredient)
+RETURN DISTINCT i.name AS IngredientName
+```
+
+c) Mostrar cuántos Ingredients tiene cada Meal, y ordenarlo por nombre descendiente:
+```cypher
+MATCH (m:Meal)-[:CONTAINS]->(i:Ingredient)
+WITH m.name AS MealName, COLLECT(DISTINCT i.name) AS IngredientsList
+RETURN MealName, SIZE(IngredientsList) AS NumberOfDistinctIngredients
+ORDER BY NumberOfDistinctIngredients DESC
+```
+
+d) Mostrar todas las Meals que no contienen un Ingredient en específico:
+```cypher
+MATCH (m:Meal)
+WHERE NOT (m)-[:CONTAINS]->(:Ingredient {name: "Chicken"})
+RETURN m.name AS MealName, m.category AS Category, m.area AS Area
+```
+
+e) Encontrar el Ingredient más común, y en cuántas Meals aparece:
+```cypher
+MATCH (i:Ingredient)<-[:CONTAINS]-(m:Meal)
+WITH i, COLLECT(DISTINCT m.name) AS MealNames
+RETURN i.name AS IngredientName, SIZE(MealNames) AS NumberOfMeals
+ORDER BY NumberOfMeals DESC
+LIMIT 5
+```
+
+f) Encontrar promedio, cuántos Ingredients hay en cada Meal, de cada tipo:
+```cypher
+MATCH (m:Meal)
+WITH m.category AS category, SIZE(m.ingredients) AS ingredientCount
+RETURN category, AVG(ingredientCount) AS averageIngredientCount
+ORDER BY averageIngredientCount DESC
+```
+
+g) Mostrar las Meals que contienen todos los Ingredients de una lista determinada:
+```cypher
+MATCH (m:Meal)-[:CONTAINS]->(i:Ingredient)
+WITH m, COLLECT(i.name) AS ingredientList
+WHERE ALL(ingredient IN ["Bread", "Eggs", "Black Pudding"] WHERE ingredient IN ingredientList)
+RETURN DISTINCT(m.name) AS MealName
+```
+
+h) Encontra las Meals que, a partir del número de ingredientes que comparten, podríamos considerar que son los más similares:
+```cypher
+MATCH (m1:Meal)-[:CONTAINS]->(i:Ingredient)<-[:CONTAINS]-(m2:Meal)
+WHERE m1.name <> m2.name
+WITH DISTINCT m1, m2, COUNT(i) AS sharedIngredients, COLLECT(DISTINCT i.name) AS sharedIngredientList
+MATCH (m1)-[:CONTAINS]->(i1:Ingredient)
+WITH DISTINCT m1, m2, sharedIngredients, sharedIngredientList, COUNT(DISTINCT i1) AS totalIngredients1
+MATCH (m2)-[:CONTAINS]->(i2:Ingredient)
+WITH DISTINCT m1, m2, sharedIngredients, sharedIngredientList, totalIngredients1, COUNT(DISTINCT i2) AS totalIngredients2
+RETURN m1.name AS Meal1, m2.name AS Meal2, sharedIngredients, sharedIngredientList,
+       (2.0 * sharedIngredients) / (totalIngredients1 + totalIngredients2) AS similarityScore
+ORDER BY similarityScore DESC
+LIMIT 1
+```
