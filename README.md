@@ -28,7 +28,9 @@ Equipo: [Aranza Ibarra](https://github.com/AranzaIbarra08), [Frida Márquez](htt
 ## API: MealDB
 [MealDB](https://www.themealdb.com/) es una base de datos que tiene una amplia colección de recetas de comidas de todo el mundo. Actualmente, MealDB cuenta con 303 recetas y 575 ingredientes. Por cada receta, incluye detalles como ingredientes, instrucciones de preparación, áreas geográfica, imagen del platillo y categorías (o tags). 
 
-El uso de la página donde se encuentran algunas de las recetas de MealDB es gratuita. Sin embargo, para tener acceso a la versión beta de la API, que permite filtros de múltiples ingredientes, agregar tus propias comidas e imágenes y listar la base de datos completa hay que pagar $50 (mxn). 
+El uso de la página donde se encuentran algunas de las recetas de MealDB es gratuita. Sin embargo, para tener acceso a la versión beta de la API, que permite filtros de múltiples ingredientes, agregar tus propias comidas e imágenes y listar la base de datos completa hay que pagar €3, aproximadamente $60 (mxn). 
+
+![Meal_DB](./img_mealdb.jpg)
 
 ## Clave para acceder a la API
 Dentro de el repositorio deberás crear un archivo `.env` con la llave de la API. Por motivos de seguiridad, los archivos `.env` fueron agregados al `gitignore`.  
